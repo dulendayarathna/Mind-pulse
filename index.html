@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧠 MindPulse - AI Study Assistant</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-wrapper">
+        <!-- Top Navbar -->
+        <header class="navbar">
+            <div class="logo-group">
+                <span class="logo-icon">🧠</span>
+                <div class="logo-text">
+                    <h1>MindPulse</h1>
+                    <span class="badge">AI Study Suite</span>
+                </div>
+            </div>
+            <div class="nav-actions">
+                <button id="theme-toggle-btn" class="nav-btn">☀️ Light</button>
+            </div>
+        </header>
+
+        <!-- Main Input Card (The Study Forge) -->
+        <main class="main-content">
+            <section class="card input-card">
+                <h2>⚡ The Study Forge</h2>
+                <p class="subtitle">Paste lecture notes or pick an example topic below to generate study decks.</p>
+
+                <!-- Example Topic Chips -->
+                <div class="sample-chips">
+                    <span class="chip-label">Try an example:</span>
+                    <button class="chip" data-topic="Binary Search Trees (Data Structures & Traversal)">🌳 Binary Search Trees</button>
+                    <button class="chip" data-topic="HTTP vs HTTPS and SSL/TLS Handshake">🔒 HTTP vs HTTPS</button>
+                    <button class="chip" data-topic="OS Deadlocks and Prevention Techniques">⚙️ OS Deadlocks</button>
+                </div>
+
+                <!-- Textarea -->
+                <div class="input-group">
+                    <textarea 
+                        id="study-input" 
+                        placeholder="Paste your study notes, code, or enter a topic here..." 
+                        rows="5"></textarea>
+                </div>
+
+                <!-- Controls -->
+                <div class="controls-row">
+                    <button id="generate-btn" class="generate-btn">
+                        <span>✨ Generate Study Pack</span>
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

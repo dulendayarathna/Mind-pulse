@@ -1,0 +1,175 @@
+/* --- MINDPULSE: DAY 1 BASE STYLESHEET --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: #0c0a17;
+    color: #ffffff;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.app-wrapper {
+    width: 100%;
+    max-width: 800px;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.logo-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    font-size: 1.8rem;
+}
+
+.logo-text h1 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+.badge {
+    background: rgba(99, 102, 241, 0.15);
+    color: #818cf8;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: 6px;
+}
+
+.nav-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Card */
+.card {
+    background: rgba(22, 18, 44, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+}
+
+.card h2 {
+    font-size: 1.3rem;
+    margin-bottom: 4px;
+}
+
+.subtitle {
+    color: #94a3b8;
+    font-size: 0.88rem;
+    margin-bottom: 1.2rem;
+}
+
+/* Sample Prompt Chips */
+.sample-chips {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 1rem;
+}
+
+.chip-label {
+    font-size: 0.78rem;
+    color: #94a3b8;
+    font-weight: 600;
+}
+
+.chip {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #cbd5e1;
+    padding: 0.35rem 0.75rem;
+    border-radius: 16px;
+    font-size: 0.78rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.chip:hover {
+    color: #ffffff;
+    border-color: #6366f1;
+    background: rgba(99, 102, 241, 0.15);
+}
+
+/* Input Textarea */
+.input-group textarea {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 0.95rem;
+    padding: 1rem;
+    border-radius: 14px;
+    outline: none;
+    resize: vertical;
+    line-height: 1.6;
+    transition: border-color 0.2s;
+}
+
+.input-group textarea:focus {
+    border-color: #6366f1;
+}
+
+/* Generate Button */
+.controls-row {
+    margin-top: 1.2rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.generate-btn {
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    border: none;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 0.75rem 1.6rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.generate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
