@@ -1,4 +1,23 @@
-/* --- MINDPULSE: DAY 1 BASE STYLESHEET --- */
+/* --- CYBER EMERALD & ELECTRIC VIOLET PALETTE --- */
+:root {
+    --bg-dark: #08090d;          /* Deep Obsidian Canvas */
+    --card-bg: rgba(15, 18, 28, 0.75); /* Frosted Dark Slate Glass */
+    --card-border: rgba(255, 255, 255, 0.08);
+    
+    /* Neon Accents */
+    --cyber-emerald: #10b981;    /* Vibrant Cyber Green */
+    --electric-violet: #8b5cf6;  /* Neon Purple */
+    --holo-cyan: #06b6d4;        /* Cyan Glow */
+    
+    /* Gradients */
+    --primary-gradient: linear-gradient(135deg, #10b981, #06b6d4);
+    --neon-gradient: linear-gradient(135deg, #8b5cf6, #10b981);
+    
+    /* Typography */
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
