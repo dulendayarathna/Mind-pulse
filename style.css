@@ -191,31 +191,28 @@ body {
     font-size: 0.88rem;
     margin-bottom: 1.2rem;
 }
-/* Sample Prompt Chips */
 .sample-chips {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 8px;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
 }
-
 .chip-label {
     font-size: 0.78rem;
-    color: #94a3b8;
+    color: var(--text-muted);
     font-weight: 600;
 }
-
 .chip {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #cbd5e1;
-    padding: 0.35rem 0.75rem;
-    border-radius: 16px;
-    font-size: 0.78rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--card-border);
+    color: var(--text-muted);
+    padding: 0.4rem 0.85rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
     font-family: inherit;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.25s ease;
 }
 
 .chip:hover {
