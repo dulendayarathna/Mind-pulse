@@ -109,16 +109,24 @@ body {
 }
 
 .app-wrapper {
+    position: relative;
+    z-index: 1;
     width: 100%;
     max-width: 800px;
 }
-
-/* Navbar */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
+}
+.logo-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.logo-icon {
+    font-size: 1.8rem;
 }
 
 .logo-group {
