@@ -35,6 +35,99 @@
             </div>
         </div>
     </header>
+    <!-- 2. MAIN WEB APP WORKSPACE -->
+    <main class="app-main">
+        
+        <!-- A. Hero Welcome Banner -->
+        <section class="hero-banner">
+            <h2>Welcome to Your Study Workspace 👋</h2>
+            <p>Paste notes or choose any topic to generate summaries, 3D flashcards, and quizzes with AI.</p>
+        </section>
 
+        <!-- B. Two-Panel Studio Grid -->
+        <div class="workspace-grid">
+            
+            <!-- LEFT PANEL: The Study Forge (Input) -->
+            <section id="forge-section" class="panel-card">
+                <div class="panel-title-bar">
+                    <h3>⚡ The Study Forge</h3>
+                    <span class="panel-badge">Input</span>
+                </div>
+
+                <!-- Example Topic Chips -->
+                <div class="chips-container">
+                    <span class="chips-label">Quick topics:</span>
+                    <button class="chip" data-topic="Binary Search Trees (Data Structures & Traversal)">🌳 Binary Trees</button>
+                    <button class="chip" data-topic="HTTP vs HTTPS and SSL Handshake">🔒 HTTP vs HTTPS</button>
+                    <button class="chip" data-topic="OS Deadlocks and Prevention">⚙️ OS Deadlocks</button>
+                </div>
+
+                <!-- Input Textarea -->
+                <div class="textarea-group">
+                    <textarea id="study-input" placeholder="Paste your lecture notes, slides, or enter a topic here..." rows="6"></textarea>
+                </div>
+
+                <!-- Controls Bar (Difficulty + Generate Button) -->
+                <div class="forge-controls">
+                    <div class="select-group">
+                        <label for="difficulty-level">Difficulty:</label>
+                        <select id="difficulty-level">
+                            <option value="university">🏛️ University</option>
+                            <option value="intro">🎓 Beginner</option>
+                            <option value="interview">💼 Interview</option>
+                        </select>
+                    </div>
+
+                    <button id="generate-btn" class="btn-primary">
+                        <span>✨ Generate Study Deck</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- RIGHT PANEL: Live 3D Study Deck Stage -->
+            <section id="study-stage" class="panel-card">
+                <div class="panel-title-bar">
+                    <h3>🎴 3D Study Flashcards</h3>
+                    <span id="card-counter-badge" class="panel-badge">5 Cards</span>
+                </div>
+
+                <!-- Flashcard Screen -->
+                <div class="flashcard-box" id="flashcard-box">
+                    <div class="flashcard-content">
+                        <span class="card-hint">CONCEPT / QUESTION</span>
+                        <p id="card-display-text" class="card-text">Click an example topic on the left and hit Generate to load your first 3D study card!</p>
+                        <span class="flip-subtext">🔄 Click card to flip</span>
+                    </div>
+                </div>
+
+                <!-- Deck Navigation Controls -->
+                <div class="deck-nav-bar">
+                    <button id="prev-card-btn" class="btn-secondary">⬅️ Prev</button>
+                    <span id="card-progress-text" class="progress-indicator">Card 1 of 5</span>
+                    <button id="next-card-btn" class="btn-secondary">Next ➡️</button>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- C. BOTTOM SECTION: Practice Quiz Arena -->
+        <section id="quiz-section" class="panel-card full-width-panel">
+            <div class="panel-title-bar">
+                <h3>❓ Self-Test Practice Arena</h3>
+                <span class="panel-badge">Interactive Quiz</span>
+            </div>
+            <div id="quiz-area" class="quiz-area">
+                <p class="empty-quiz-notice">Generated multiple-choice questions with instant grading and explanations will appear here! 🎯</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 3. FOOTER -->
+    <footer class="app-footer">
+        <p>MindPulse AI Study Companion • Built with Vanilla JS & Google Gemini</p>
+    </footer>
+
+    <script src="app.js"></script>
 </body>
 </html>

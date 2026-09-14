@@ -1,97 +1,32 @@
-/* --- CYBER EMERALD & ELECTRIC VIOLET PALETTE --- */
+/* =======================================================
+   🧠 MINDPULSE: MODERN LIGHT WEB APP STYLESHEET
+   ======================================================= */
+
+/* 1. ROOT VARIABLES (Clean Light Palette with Indigo Accents) */
 :root {
-    --bg-dark: #08090d;          /* Deep Obsidian Canvas */
-    --card-bg: rgba(15, 18, 28, 0.75); /* Frosted Dark Slate Glass */
-    --card-border: rgba(255, 255, 255, 0.08);
+    --bg-canvas: #f8fafc;          /* Soft porcelain light canvas */
+    --card-bg: #ffffff;            /* Crisp white cards */
+    --card-border: #e2e8f0;        /* Clean light gray border */
     
-    /* Neon Accents */
-    --cyber-emerald: #10b981;    /* Vibrant Cyber Green */
-    --electric-violet: #8b5cf6;  /* Neon Purple */
-    --holo-cyan: #06b6d4;        /* Cyan Glow */
+    /* Brand Accents */
+    --primary-indigo: #4f46e5;     /* Vibrant Royal Indigo */
+    --indigo-hover: #4338ca;
+    --indigo-soft: #eef2ff;        /* Soft lavender tint */
+    --emerald-accent: #10b981;
     
-    /* Gradients */
-    --primary-gradient: linear-gradient(135deg, #10b981, #06b6d4);
-    --neon-gradient: linear-gradient(135deg, #8b5cf6, #10b981);
-    
-    /* Typography */
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
+    /* Typography Colors */
+    --text-heading: #0f172a;       /* Deep charcoal */
+    --text-body: #334155;          /* Slate text */
+    --text-muted: #64748b;         /* Muted gray */
+
+    /* Shadows & Radii */
+    --radius-card: 16px;
+    --radius-btn: 10px;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
 }
 
-body{
-    font-family: "Outfit" , sans-serif;
-    background-color: var(--bg-dark);
-    background-image: 
-    linear-gradient(rgba(255,255,255,0.03)1px,transperant 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03)1px,transperant 1px);
-    background-size: 40px 40px;
-    color: var(--text-main);
-    min-height: 100vh;
-    padding: 2rem 1rem;
-    display: flex;
-    justify-content:center;
-    overflow-x: hidden;
-    position: relative;
-}
-.cyber-bg{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.glow-orb{
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.35;
-    will-change: transform;
-}
-
-orb-emerald {
-    width: 450px;
-    height: 450px;
-    background: radial-gradient(circle, var(--cyber-emerald)0%,transparent 70%);
-    top: -10%;
-    left: -10%;
-    animation: float1 18s infinite alternate ease-in-out;
-}
-
-.orb-violet {
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, var(--electric-violet) 0%, transparent 70%);
-    bottom: -15%;
-    right: -10%;
-    animation: float2 22s infinite alternate ease-in-out;
-}
-
-.orb-cyan {
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, var(--holo-cyan) 0%, transparent 70%);
-    top: 30%;
-    left: 60%;
-    animation: float3 20s infinite alternate ease-in-out;
-}
-
-keyframes float1 {
-    0% { transform: translate(0px, 0px) scale(1); }
-    100% { transform: translate(120px, 80px) scale(1.15); }
-}
-@keyframes float2 {
-    0% { transform: translate(0px, 0px) scale(1); }
-    100% { transform: translate(-140px, -90px) scale(1.1); }
-}
-@keyframes float3 {
-    0% { transform: translate(0px, 0px) scale(1); }
-    100% { transform: translate(-90px, 100px) scale(1.2); }
-}
-
+/* 2. BASE RESET */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -99,178 +34,417 @@ keyframes float1 {
 }
 
 body {
-    font-family: 'Outfit', sans-serif;
-    background-color: #0c0a17;
-    color: #ffffff;
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-canvas);
+    color: var(--text-body);
     min-height: 100vh;
-    padding: 2rem 1rem;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    line-height: 1.5;
 }
 
-.app-wrapper {
-    position: relative;
-    z-index: 1;
+/* 3. FULL-WIDTH TOP HEADER / NAVBAR */
+.app-header {
     width: 100%;
-    max-width: 800px;
+    background-color: #ffffff;
+    border-bottom: 1px solid var(--card-border);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
 }
-.navbar {
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.85rem 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
 }
-.logo-group {
+
+.brand {
     display: flex;
     align-items: center;
-    gap: 12px;
-}
-.logo-icon {
-    font-size: 1.8rem;
+    gap: 8px;
 }
 
-.logo-group {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.logo-icon {
-    font-size: 1.8rem;
-}
-
-
-.nav-btn {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #ffffff;
-    padding: 0.5rem 1rem;
-    border-radius: 12px;
-    font-family: inherit;
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-.logo-text h1 {
+.brand-icon {
     font-size: 1.6rem;
-    font-weight: 800;
-    letter-spacing: -0.5px;
-    background: var(--primary-gradient); /* Emerald to Cyan */
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: inline-block;
 }
-.badge {
-    background: rgba(16, 185, 129, 0.12);
-    color: var(--cyber-emerald);
-    border: 1px solid rgba(16, 185, 129, 0.3);
+
+.brand-name {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--text-heading);
+    letter-spacing: -0.3px;
+}
+
+.brand-tag {
+    background: var(--indigo-soft);
+    color: var(--primary-indigo);
+    border: 1px solid #c7d2fe;
     font-size: 0.68rem;
     font-weight: 700;
     padding: 2px 8px;
-    border-radius: 20px;
-    margin-left: 6px;
+    border-radius: 6px;
+    margin-left: 4px;
 }
-/* Card */
-.card {
-    background: var(--card-bg);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
+
+/* Nav Links */
+.nav-links {
+    display: flex;
+    gap: 8px;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.nav-item:hover {
+    color: var(--primary-indigo);
+    background-color: var(--indigo-soft);
+}
+
+.nav-item.active {
+    color: var(--primary-indigo);
+    background-color: var(--indigo-soft);
+}
+
+/* Header Action Buttons */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-secondary {
+    background-color: #ffffff;
     border: 1px solid var(--card-border);
-    border-radius: 24px;
-    padding: 2rem;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(16, 185, 129, 0.05);
+    color: var(--text-body);
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.45rem 0.9rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
-.card h2 {
-    font-size: 1.35rem;
-    font-weight: 700;
+
+.btn-secondary:hover {
+    border-color: #cbd5e1;
+    background-color: #f8fafc;
+}
+
+.btn-icon {
+    background-color: #ffffff;
+    border: 1px solid var(--card-border);
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.btn-icon:hover {
+    background-color: #f8fafc;
+}
+
+/* 4. MAIN APP CONTAINER */
+.app-main {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem 1.5rem;
+    flex: 1;
+}
+
+/* Hero Welcome Banner */
+.hero-banner {
+    margin-bottom: 2rem;
+}
+
+.hero-banner h2 {
+    font-size: 1.65rem;
+    font-weight: 800;
+    color: var(--text-heading);
+    letter-spacing: -0.5px;
     margin-bottom: 4px;
 }
-.subtitle {
+
+.hero-banner p {
     color: var(--text-muted);
-    font-size: 0.88rem;
-    margin-bottom: 1.2rem;
+    font-size: 0.95rem;
 }
-.sample-chips {
+
+/* 5. TWO-PANEL WORKSPACE GRID (Left: Input, Right: Flashcards) */
+.workspace-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+/* Panel Card Styles */
+.panel-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-card);
+    padding: 1.8rem;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-title-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.panel-title-bar h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-heading);
+}
+
+.panel-badge {
+    background-color: #f1f5f9;
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 6px;
+}
+
+/* Chips */
+.chips-container {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 1.2rem;
+    gap: 6px;
+    margin-bottom: 1rem;
 }
-.chip-label {
-    font-size: 0.78rem;
+
+.chips-label {
+    font-size: 0.75rem;
     color: var(--text-muted);
     font-weight: 600;
 }
+
 .chip {
-    background: rgba(255, 255, 255, 0.04);
+    background-color: #f8fafc;
     border: 1px solid var(--card-border);
-    color: var(--text-muted);
-    padding: 0.4rem 0.85rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
+    color: var(--text-body);
+    padding: 0.35rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.78rem;
     font-family: inherit;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.25s ease;
+    transition: all 0.2s ease;
 }
 
 .chip:hover {
-    color: #ffffff;
-    border-color: #6366f1;
-    background: rgba(99, 102, 241, 0.15);
+    background-color: var(--indigo-soft);
+    border-color: #c7d2fe;
+    color: var(--primary-indigo);
 }
 
-.chip:hover {
-    color: var(--text-main);
-    border-color: var(--cyber-emerald);
-    background: rgba(16, 185, 129, 0.12);
-    box-shadow: 0 0 15px rgba(16, 185, 129, 0.25);
-    transform: translateY(-2px);
+/* Textarea */
+.textarea-group {
+    flex: 1;
+    margin-bottom: 1.2rem;
 }
-/* --- TEXTAREA WITH CYBER FOCUS RING --- */
-.input-group textarea {
+
+.textarea-group textarea {
     width: 100%;
-    background: rgba(0, 0, 0, 0.35);
+    height: 140px;
+    background-color: #f8fafc;
     border: 1px solid var(--card-border);
-    color: var(--text-main);
+    color: var(--text-heading);
     font-family: inherit;
-    font-size: 0.95rem;
-    padding: 1.1rem;
-    border-radius: 16px;
+    font-size: 0.92rem;
+    padding: 0.9rem;
+    border-radius: 10px;
     outline: none;
     resize: vertical;
-    line-height: 1.6;
-    transition: all 0.25s ease;
+    line-height: 1.5;
+    transition: all 0.2s ease;
 }
-/* Glowing green focus ring */
-.input-group textarea:focus {
-    border-color: var(--cyber-emerald);
-    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2), 0 0 20px rgba(16, 185, 129, 0.1);
+
+.textarea-group textarea:focus {
+    background-color: #ffffff;
+    border-color: var(--primary-indigo);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
 }
-.controls-row {
-    margin-top: 1.4rem;
+
+/* Forge Controls */
+.forge-controls {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
 }
-.generate-btn {
-    background: var(--primary-gradient); /* Emerald to Cyan Gradient */
-    border: none;
-    color: #04130d; /* Crisp dark contrast text */
+
+.select-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.select-group label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.select-group select {
+    background-color: #f8fafc;
+    border: 1px solid var(--card-border);
+    color: var(--text-heading);
+    padding: 0.45rem 0.75rem;
+    border-radius: 8px;
     font-family: inherit;
-    font-size: 0.95rem;
-    font-weight: 800;
-    padding: 0.8rem 1.8rem;
-    border-radius: 14px;
+    font-size: 0.82rem;
+    outline: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--primary-indigo);
+    border: none;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 0.65rem 1.4rem;
+    border-radius: var(--radius-btn);
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 8px;
-    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
-    transition: all 0.25s ease;
+    gap: 6px;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+    transition: all 0.2s ease;
 }
-.generate-btn:hover {
+
+.btn-primary:hover {
+    background-color: var(--indigo-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35);
+}
+
+/* 6. RIGHT PANEL: 3D FLASHCARD STAGE */
+.flashcard-box {
+    background: linear-gradient(135deg, #ffffff, #f8fafc);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    height: 200px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    transition: all 0.25s ease;
+    margin-bottom: 1.2rem;
+}
+
+.flashcard-box:hover {
+    border-color: #c7d2fe;
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5);
-    filter: brightness(1.1);
+    box-shadow: 0 8px 25px rgba(79, 70, 229, 0.08);
+}
+
+.flashcard-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.card-hint {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--primary-indigo);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.card-text {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-heading);
+    line-height: 1.4;
+    margin: auto 0;
+}
+
+.flip-subtext {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+.deck-nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.progress-indicator {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+/* 7. BOTTOM FULL-WIDTH QUIZ PANEL */
+.full-width-panel {
+    margin-top: 1rem;
+}
+
+.quiz-area {
+    background-color: #f8fafc;
+    border: 1px dashed var(--card-border);
+    border-radius: 12px;
+    padding: 2.5rem;
+    text-align: center;
+}
+
+.empty-quiz-notice {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+}
+
+/* 8. FOOTER */
+.app-footer {
+    border-top: 1px solid var(--card-border);
+    background-color: #ffffff;
+    padding: 1.2rem;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+}
+
+/* 9. RESPONSIVE MOBILE VIEW (Stacks columns on phone screens) */
+@media (max-width: 860px) {
+    .workspace-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-links {
+        display: none; /* Hide middle links on small phone screens */
+    }
 }
