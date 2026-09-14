@@ -3,66 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🧠 MindPulse - AI Study Assistant</title>
+    <title>MindPulse — AI Study Suite</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class ="cyber-bg">
-        <div class="glow-orb orb-emerald"></div>
-         <div class="glow-orb orb-violet"></div>
-        <div class="glow-orb orb-cyan"></div>
-    </div>
-    <div class="app-wrapper">
-        <header class="navbar">
-            <div class="logo-group">
-                <span class="logo-icon">🧠</span>
-                <div class="logo-text">
-                    <h1>MindPulse</h1>
-                    <span class="badge">AI Study Companion</span>
-                </div>
+    <!-- 1. FULL-WIDTH TOP NAVBAR -->
+    <header class="app-header">
+        <div class="header-container">
+            <div class="brand">
+                <span class="brand-icon">🧠</span>
+                <span class="brand-name">MindPulse</span>
+                <span class="brand-tag">AI Studio</span>
             </div>
-            <div class="nav-actions">
-                <button id="theme-toggle-btn" class="nav-btn">☀️ Light</button>
+
+            <!-- Navigation Links -->
+            <nav class="nav-links">
+                <a href="#forge-section" class="nav-item active">⚡ Studio</a>
+                <a href="#study-stage" class="nav-item">🎴 Flashcards</a>
+                <a href="#quiz-section" class="nav-item">❓ Quizzes</a>
+            </nav>
+
+            <!-- Action Controls -->
+            <div class="header-actions">
+                <button id="api-key-btn" class="btn-secondary">🔑 API Key</button>
+                <button id="theme-toggle-btn" class="btn-icon">☀️</button>
             </div>
-        </header>
+        </div>
+    </header>
 
-        <!-- Main Input Card (The Study Forge) -->
-        <main class="main-content">
-            <section class="card input-card">
-                <h2>⚡ The Study Forge</h2>
-                <p class="subtitle">Paste lecture notes or pick an example topic below to generate study decks.</p>
-
-                <!-- Example Topic Chips -->
-                <div class="sample-chips">
-                    <span class="chip-label">Try an example:</span>
-                    <button class="chip" data-topic="Binary Search Trees (Data Structures & Traversal)">🌳 Binary Search Trees</button>
-                    <button class="chip" data-topic="HTTP vs HTTPS and SSL/TLS Handshake">🔒 HTTP vs HTTPS</button>
-                    <button class="chip" data-topic="OS Deadlocks and Prevention Techniques">⚙️ OS Deadlocks</button>
-                </div>
-
-                <!-- Textarea -->
-                <div class="input-group">
-                    <textarea 
-                        id="study-input" 
-                        placeholder="Paste your study notes, code, or enter a topic here..." 
-                        rows="5"></textarea>
-                </div>
-
-                <!-- Controls -->
-                <div class="controls-row">
-                    <button id="generate-btn" class="generate-btn">
-                        <span>✨ Generate Study Pack</span>
-                    </button>
-                </div>
-            </section>
-        </main>
-    </div>
-
-    <script src="app.js"></script>
 </body>
 </html>
