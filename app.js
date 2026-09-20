@@ -119,7 +119,8 @@ generateBtn.addEventListener("click", () => {
     isFlipped = false;
     updateCardDisplay();
 
-    alert(`🎉 New study deck generated for: "${text}"!`);
+    alert(`🎉 New study deck generated for: "${text}"!`); // Render the quiz in the bottom arena
+renderQuiz(text);
 });
 
 // 12. RENDER THE PRACTICE QUIZ
