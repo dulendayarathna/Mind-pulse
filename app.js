@@ -76,3 +76,47 @@ flashcardBox.addEventListener("click", () => {
 
 // 7. INITIALIZE: Show the first card immediately when page loads
 updateCardDisplay();
+
+// 10. QUICK TOPIC CHIPS: Click to auto-fill the input box
+chips.forEach(chip => {
+    chip.addEventListener("click", () => {
+        const topic = chip.getAttribute("data-topic");
+        studyInput.value = topic; // Paste the text into textarea
+        studyInput.focus();       // Place the typing cursor inside
+    });
+});
+
+// 11. GENERATE BUTTON: Create a new study deck
+generateBtn.addEventListener("click", () => {
+    const text = studyInput.value.trim();
+
+    // Validation: Check if input is empty
+    if (!text) {
+        alert("Please enter a topic or click a quick topic chip above!");
+        studyInput.focus();
+        return;
+    }
+
+    // Load a custom starter deck for the chosen topic
+    currentDeck = [
+        {
+            front: `Core Concept: ${text}`,
+            back: `Detailed explanation and key principles for ${text}. Focus on definitions, mechanisms, and real-world trade-offs.`
+        },
+        {
+            front: `What is the main advantage of ${text}?`,
+            back: `Improves system performance, security, and scalability when implemented correctly.`
+        },
+        {
+            front: `What is a common edge-case or challenge with ${text}?`,
+            back: `Resource contention, race conditions, or unhandled null pointers in boundary conditions.`
+        }
+    ];
+
+    // Reset back to Card 1 (Front side) and draw on screen
+    currentCardIndex = 0;
+    isFlipped = false;
+    updateCardDisplay();
+
+    alert(`🎉 New study deck generated for: "${text}"!`);
+});
