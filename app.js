@@ -20,7 +20,29 @@ const flashcardBox = document.getElementById("flashcard-box");
 const cardDisplayText = document.getElementById("card-display-text");
 const cardHint = document.querySelector(".card-hint");
 const cardProgressText = document.getElementById("card-progress-text");
-const cardCounterBadge = document.getElementById("card-counter-badge");)
+const cardCounterBadge = document.getElementById("card-counter-badge");
+const prevCardBtn = document.getElementById("prev-card-btn");
+const nextCardBtn = document.getElementById("next-card-btn");
+
+// 8. NEXT CARD BUTTON
+nextCardBtn.addEventListener("click", () => {
+    // Only move forward if we are NOT on the last card
+    if (currentCardIndex < currentDeck.length - 1) {
+        currentCardIndex++;
+        isFlipped = false;   // Always show the Question side on a new card!
+        updateCardDisplay(); // Refresh the screen
+    }
+});
+
+// 9. PREVIOUS CARD BUTTON
+prevCardBtn.addEventListener("click", () => {
+    // Only move backward if we are NOT on the very first card (index 0)
+    if (currentCardIndex > 0) {
+        currentCardIndex--;
+        isFlipped = false;   // Always show the Question side on a new card!
+        updateCardDisplay(); // Refresh the screen
+    }
+});
 
 // 5. FUNCTION: Update the card display on the screen
 function updateCardDisplay() {
