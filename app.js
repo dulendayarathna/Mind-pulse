@@ -13,4 +13,10 @@ let currentDeck = [
 
 let currentCardIndex = 0;
 
-let isFlipped = false; // false = Front (Question), true = back(Answer)
+let isFlipped = false;
+
+const flashcardBox = document.getElementById("flashcard-box");
+const cardDisplayText = document.getElementById("card-display-text");
+const cardHint = document.querySelector(".card-hint");
+const cardProgressText = document.getElementById("card-progress-text");
+const cardCounterBadge = document.getElementById("card-counter-badge");)
