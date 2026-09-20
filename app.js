@@ -26,6 +26,7 @@ const nextCardBtn = document.getElementById("next-card-btn");
 const studyInput = document.getElementById("study-input");
 const generateBtn = document.getElementById("generate-btn");
 const chips = document.querySelectorAll(".chip");
+const quizArea = document.getElementById("quiz-area");
 
 // 8. NEXT CARD BUTTON
 nextCardBtn.addEventListener("click", () => {
