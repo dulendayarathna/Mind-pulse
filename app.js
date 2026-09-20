@@ -121,3 +121,53 @@ generateBtn.addEventListener("click", () => {
 
     alert(`🎉 New study deck generated for: "${text}"!`);
 });
+
+// 12. RENDER THE PRACTICE QUIZ
+function renderQuiz(topic) {
+    quizArea.innerHTML = `
+        <div style="text-align: left; max-width: 650px; margin: 0 auto;">
+            <div style="font-size: 0.78rem; font-weight: 700; color: #4f46e5; margin-bottom: 6px; text-transform: uppercase;">
+                Question 1 of 1 • ${topic}
+            </div>
+            <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: #0f172a;">
+                Which principle is most essential when understanding ${topic}?
+            </h4>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+                <button class="btn-secondary" style="text-align: left; padding: 0.75rem 1rem;" onclick="handleQuizAnswer(this, true)">
+                    <strong>A.</strong> Correct partitioning and structural optimization
+                </button>
+                <button class="btn-secondary" style="text-align: left; padding: 0.75rem 1rem;" onclick="handleQuizAnswer(this, false)">
+                    <strong>B.</strong> Linear sequential scanning without indexes
+                </button>
+                <button class="btn-secondary" style="text-align: left; padding: 0.75rem 1rem;" onclick="handleQuizAnswer(this, false)">
+                    <strong>C.</strong> Completely random memory allocation
+                </button>
+            </div>
+            <div id="quiz-feedback" style="display: none; margin-top: 1rem; padding: 0.85rem 1rem; border-radius: 8px; font-size: 0.88rem; line-height: 1.5;"></div>
+        </div>
+    `;
+}
+
+// 13. INSTANT QUIZ GRADING LOGIC
+window.handleQuizAnswer = function(button, isCorrect) {
+    const feedback = document.getElementById("quiz-feedback");
+    feedback.style.display = "block";
+
+    if (isCorrect) {
+        // Correct Answer (Green Feedback)
+        button.style.backgroundColor = "#ecfdf5";
+        button.style.borderColor = "#10b981";
+        button.style.color = "#047857";
+        feedback.style.backgroundColor = "#ecfdf5";
+        feedback.style.color = "#047857";
+        feedback.innerHTML = "🎉 <strong>Correct!</strong> Great job. This concept relies on optimized structural partitioning rather than slow sequential scanning.";
+    } else {
+        // Incorrect Answer (Red Feedback)
+        button.style.backgroundColor = "#fef2f2";
+        button.style.borderColor = "#ef4444";
+        button.style.color = "#b91c1c";
+        feedback.style.backgroundColor = "#fef2f2";
+        feedback.style.color = "#b91c1c";
+        feedback.innerHTML = "❌ <strong>Incorrect.</strong> That option would degrade performance. Review option A!";
+    }
+};
