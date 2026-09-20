@@ -23,6 +23,9 @@ const cardProgressText = document.getElementById("card-progress-text");
 const cardCounterBadge = document.getElementById("card-counter-badge");
 const prevCardBtn = document.getElementById("prev-card-btn");
 const nextCardBtn = document.getElementById("next-card-btn");
+const studyInput = document.getElementById("study-input");
+const generateBtn = document.getElementById("generate-btn");
+const chips = document.querySelectorAll(".chip");
 
 // 8. NEXT CARD BUTTON
 nextCardBtn.addEventListener("click", () => {
