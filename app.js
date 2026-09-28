@@ -182,4 +182,47 @@ window.handleQuizAnswer = function(button, isCorrect) {
         feedback.style.color = "#b91c1c";
         feedback.innerHTML = "❌ <strong>Incorrect.</strong> That option would degrade performance. Review option A!";
     }
+
+    // Populate input if a key was saved earlier
+if (apiKey && apiKey !== "DEMO_MODE") {
+    apiKeyInput.value = apiKey;
+}
+
+// Open Modal when clicking "🔑 API Key" in header
+apiKeyBtn.addEventListener("click", () => {
+    apiModal.style.display = "flex";
+});
+
+// Close Modal when clicking "×"
+closeModalBtn.addEventListener("click", () => {
+    apiModal.style.display = "none";
+});
+
+// Close Modal when clicking outside the modal card
+window.addEventListener("click", (e) => {
+    if (e.target === apiModal) {
+        apiModal.style.display = "none";
+    }
+});
+
+// Save API Key into localStorage
+saveApiKeyBtn.addEventListener("click", () => {
+    const key = apiKeyInput.value.trim();
+    if (key) {
+        apiKey = key;
+        localStorage.setItem("geminiApiKey", apiKey);
+        alert("✅ Gemini API Key saved securely in your browser!");
+        apiModal.style.display = "none";
+    } else {
+        alert("Please enter a valid API key or select Offline Demo.");
+    }
+});
+
+// Enable Offline Demo Mode
+useDemoBtn.addEventListener("click", () => {
+    apiKey = "DEMO_MODE";
+    localStorage.setItem("geminiApiKey", apiKey);
+    apiModal.style.display = "none";
+    alert("⚡ Offline Demo Mode activated!");
+});
 };
