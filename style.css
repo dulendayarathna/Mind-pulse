@@ -448,3 +448,137 @@ body {
         display: none; /* Hide middle links on small phone screens */
     }
 }
+
+/* =======================================================
+   🔑 API KEY SETTINGS MODAL STYLES
+   ======================================================= */
+
+/* Fullscreen Dimmed Backdrop */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(15, 23, 42, 0.6); /* Dim dark backdrop */
+    backdrop-filter: blur(8px);               /* Blurs the website behind it */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+/* Modal Card Box */
+.modal-card {
+    background-color: #ffffff;
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    width: 90%;
+    max-width: 480px;
+    padding: 1.8rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    animation: popIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.modal-header h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-heading);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close-btn:hover {
+    color: var(--text-heading);
+}
+
+.modal-desc {
+    font-size: 0.88rem;
+    color: var(--text-body);
+    margin-bottom: 1rem;
+}
+
+/* Help Box (Link to Google AI Studio) */
+.api-help-box {
+    background-color: var(--indigo-soft);
+    border: 1px solid #c7d2fe;
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.82rem;
+}
+
+.api-help-box a {
+    color: var(--primary-indigo);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.api-help-box a:hover {
+    text-decoration: underline;
+}
+
+/* API Input Field */
+.input-field-group {
+    margin-bottom: 0.8rem;
+}
+
+.input-field-group label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-heading);
+    margin-bottom: 4px;
+}
+
+.input-field-group input {
+    width: 100%;
+    background-color: #f8fafc;
+    border: 1px solid var(--card-border);
+    color: var(--text-heading);
+    padding: 0.65rem 0.85rem;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.input-field-group input:focus {
+    background-color: #ffffff;
+    border-color: var(--primary-indigo);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+}
+
+.security-text {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 1.5rem;
+}

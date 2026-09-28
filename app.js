@@ -28,6 +28,17 @@ const generateBtn = document.getElementById("generate-btn");
 const chips = document.querySelectorAll(".chip");
 const quizArea = document.getElementById("quiz-area");
 
+// API Key State (Loads saved key from browser memory, if any)
+let apiKey = localStorage.getItem("geminiApiKey") || "";
+
+// Modal DOM Elements
+const apiKeyBtn = document.getElementById("api-key-btn");
+const apiModal = document.getElementById("api-modal");
+const closeModalBtn = document.getElementById("close-modal-btn");
+const apiKeyInput = document.getElementById("api-key-input");
+const saveApiKeyBtn = document.getElementById("save-api-key-btn");
+const useDemoBtn = document.getElementById("use-demo-btn");
+
 // 8. NEXT CARD BUTTON
 nextCardBtn.addEventListener("click", () => {
     // Only move forward if we are NOT on the last card
