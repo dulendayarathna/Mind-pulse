@@ -224,5 +224,5 @@ useDemoBtn.addEventListener("click", () => {
     localStorage.setItem("geminiApiKey", apiKey);
     apiModal.style.display = "none";
     alert("⚡ Offline Demo Mode activated!");
-});
+})
 };
