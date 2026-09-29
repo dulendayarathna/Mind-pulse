@@ -225,4 +225,58 @@ useDemoBtn.addEventListener("click", () => {
     apiModal.style.display = "none";
     alert("⚡ Offline Demo Mode activated!");
 })
+// 14. GOOGLE GEMINI 1.5 FLASH API CALLER
+async function callGeminiAPI(userInput, difficulty) {
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+
+    // Prompt Engineering: Instructing Gemini to output strict JSON
+    const systemPrompt = `
+You are an expert AI study assistant. Transform the provided notes/topic into high-quality study materials for ${difficulty} level.
+Output ONLY a raw, valid JSON object matching this schema exactly (no extra text or markdown formatting):
+{
+  "flashcards": [
+    {
+      "front": "Clear question or concept",
+      "back": "Concise answer or explanation"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "Multiple choice question",
+      "options": ["Option A", "Option B", "Option C"],
+      "answerIndex": 0,
+      "explanation": "Why Option A is correct"
+    }
+  ]
+}
+Generate 3 flashcards and 1 quiz question.`;
+
+    const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            contents: [
+                {
+                    parts: [
+                        { text: systemPrompt },
+                        { text: `STUDY TOPIC / NOTES:\n${userInput}` }
+                    ]
+                }
+            ],
+            generationConfig: {
+                temperature: 0.3,
+                responseMimeType: "application/json"
+            }
+        })
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error?.message || "Failed to reach Gemini API.");
+    }
+
+    const data = await response.json();
+    const rawContent = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    return JSON.parse(rawContent);
+}
 };
