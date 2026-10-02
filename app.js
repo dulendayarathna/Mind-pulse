@@ -1,21 +1,24 @@
-let currentDeck = [//creating array to store flash cards
+// --- MINDPULSE JAVASCRIPT ENGINE ---
+
+// 1. STATE & DATA MODEL
+let currentDeck = [
     {
         front: "What is a Binary Search Tree (BST)?",
-        back: "A tree where kleft children are smaller and right children are larger."
-
+        back: "A tree where left children are smaller and right children are larger."
     },
     {
-        front:"What is the average time complexity of a BST?",
-        back:"o(log n) because half the tree is eliminated at each step."
-
+        front: "What is the average time complexity of a BST?",
+        back: "O(log n) because half the tree is eliminated at each step."
     }
 ];
 
 let currentCardIndex = 0;
-
 let isFlipped = false;
 
-//grabbing html elements
+// API Key State (Loads saved key from browser memory, if any)
+let apiKey = localStorage.getItem("geminiApiKey") || "";
+
+// 2. DOM ELEMENTS
 const flashcardBox = document.getElementById("flashcard-box");
 const cardDisplayText = document.getElementById("card-display-text");
 const cardHint = document.querySelector(".card-hint");
@@ -27,9 +30,7 @@ const studyInput = document.getElementById("study-input");
 const generateBtn = document.getElementById("generate-btn");
 const chips = document.querySelectorAll(".chip");
 const quizArea = document.getElementById("quiz-area");
-
-// API Key State (Loads saved key from browser memory, if any)
-let apiKey = localStorage.getItem("geminiApiKey") || "";
+const difficultyLevel = document.getElementById("difficulty-level");
 
 // Modal DOM Elements
 const apiKeyBtn = document.getElementById("api-key-btn");
@@ -39,151 +40,7 @@ const apiKeyInput = document.getElementById("api-key-input");
 const saveApiKeyBtn = document.getElementById("save-api-key-btn");
 const useDemoBtn = document.getElementById("use-demo-btn");
 
-// 8. NEXT CARD BUTTON
-nextCardBtn.addEventListener("click", () => {
-    // Only move forward if we are NOT on the last card
-    if (currentCardIndex < currentDeck.length - 1) {
-        currentCardIndex++;
-        isFlipped = false;   // Always show the Question side on a new card!
-        updateCardDisplay(); // Refresh the screen
-    }
-});
-
-// 9. PREVIOUS CARD BUTTON
-prevCardBtn.addEventListener("click", () => {
-    // Only move backward if we are NOT on the very first card (index 0)
-    if (currentCardIndex > 0) {
-        currentCardIndex--;
-        isFlipped = false;   // Always show the Question side on a new card!
-        updateCardDisplay(); // Refresh the screen
-    }
-});
-
-// 5. FUNCTION: Update the card display on the screen
-function updateCardDisplay() {
-    const card = currentDeck[currentCardIndex];//grabs card object from the array we created
-
-    if (isFlipped) {
-        // Show Answer Side (Green)
-        cardHint.textContent = "ANSWER / EXPLANATION";
-        cardHint.style.color = "#10b981";
-        cardDisplayText.textContent = card.back;
-    } else {
-        // Show Question Side (Indigo)
-        cardHint.textContent = "CONCEPT / QUESTION";
-        cardHint.style.color = "#4f46e5";
-        cardDisplayText.textContent = card.front;
-    }
-
-    // Update the progress text (e.g. Card 1 of 2)
-    cardProgressText.textContent = `Card ${currentCardIndex + 1} of ${currentDeck.length}`;
-    cardCounterBadge.textContent = `${currentDeck.length} Cards`;
-}
-
-// 6. EVENT: Flip the card when clicked
-flashcardBox.addEventListener("click", () => {
-    isFlipped = !isFlipped; // Toggles: if true becomes false, if false becomes true!
-    updateCardDisplay();    // Redraw the card with the new side
-});
-
-// 7. INITIALIZE: Show the first card immediately when page loads
-updateCardDisplay();
-
-// 10. QUICK TOPIC CHIPS: Click to auto-fill the input box
-chips.forEach(chip => {
-    chip.addEventListener("click", () => {
-        const topic = chip.getAttribute("data-topic");
-        studyInput.value = topic; // Paste the text into textarea
-        studyInput.focus();       // Place the typing cursor inside
-    });
-});
-
-// 11. GENERATE BUTTON: Create a new study deck
-generateBtn.addEventListener("click", () => {
-    const text = studyInput.value.trim();
-
-    // Validation: Check if input is empty
-    if (!text) {
-        alert("Please enter a topic or click a quick topic chip above!");
-        studyInput.focus();
-        return;
-    }
-
-    // Load a custom starter deck for the chosen topic
-    currentDeck = [
-        {
-            front: `Core Concept: ${text}`,
-            back: `Detailed explanation and key principles for ${text}. Focus on definitions, mechanisms, and real-world trade-offs.`
-        },
-        {
-            front: `What is the main advantage of ${text}?`,
-            back: `Improves system performance, security, and scalability when implemented correctly.`
-        },
-        {
-            front: `What is a common edge-case or challenge with ${text}?`,
-            back: `Resource contention, race conditions, or unhandled null pointers in boundary conditions.`
-        }
-    ];
-
-    // Reset back to Card 1 (Front side) and draw on screen
-    currentCardIndex = 0;
-    isFlipped = false;
-    updateCardDisplay();
-
-    alert(`🎉 New study deck generated for: "${text}"!`); // Render the quiz in the bottom arena
-renderQuiz(text);
-});
-
-// 12. RENDER THE PRACTICE QUIZ
-function renderQuiz(topic) {
-    quizArea.innerHTML = `
-        <div style="text-align: left; max-width: 650px; margin: 0 auto;">
-            <div style="font-size: 0.78rem; font-weight: 700; color: #4f46e5; margin-bottom: 6px; text-transform: uppercase;">
-                Question 1 of 1 • ${topic}
-            </div>
-            <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: #0f172a;">
-                Which principle is most essential when understanding ${topic}?
-            </h4>
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-                <button class="btn-secondary" style="text-align: left; padding: 0.75rem 1rem;" onclick="handleQuizAnswer(this, true)">
-                    <strong>A.</strong> Correct partitioning and structural optimization
-                </button>
-                <button class="btn-secondary" style="text-align: left; padding: 0.75rem 1rem;" onclick="handleQuizAnswer(this, false)">
-                    <strong>B.</strong> Linear sequential scanning without indexes
-                </button>
-                <button class="btn-secondary" style="text-align: left; padding: 0.75rem 1rem;" onclick="handleQuizAnswer(this, false)">
-                    <strong>C.</strong> Completely random memory allocation
-                </button>
-            </div>
-            <div id="quiz-feedback" style="display: none; margin-top: 1rem; padding: 0.85rem 1rem; border-radius: 8px; font-size: 0.88rem; line-height: 1.5;"></div>
-        </div>
-    `;
-}
-
-// 13. INSTANT QUIZ GRADING LOGIC
-window.handleQuizAnswer = function(button, isCorrect) {
-    const feedback = document.getElementById("quiz-feedback");
-    feedback.style.display = "block";
-
-    if (isCorrect) {
-        // Correct Answer (Green Feedback)
-        button.style.backgroundColor = "#ecfdf5";
-        button.style.borderColor = "#10b981";
-        button.style.color = "#047857";
-        feedback.style.backgroundColor = "#ecfdf5";
-        feedback.style.color = "#047857";
-        feedback.innerHTML = "🎉 <strong>Correct!</strong> Great job. This concept relies on optimized structural partitioning rather than slow sequential scanning.";
-    } else {
-        // Incorrect Answer (Red Feedback)
-        button.style.backgroundColor = "#fef2f2";
-        button.style.borderColor = "#ef4444";
-        button.style.color = "#b91c1c";
-        feedback.style.backgroundColor = "#fef2f2";
-        feedback.style.color = "#b91c1c";
-        feedback.innerHTML = "❌ <strong>Incorrect.</strong> That option would degrade performance. Review option A!";
-    }
-
-    // Populate input if a key was saved earlier
+// 3. API KEY MODAL LISTENERS
 if (apiKey && apiKey !== "DEMO_MODE") {
     apiKeyInput.value = apiKey;
 }
@@ -224,15 +81,207 @@ useDemoBtn.addEventListener("click", () => {
     localStorage.setItem("geminiApiKey", apiKey);
     apiModal.style.display = "none";
     alert("⚡ Offline Demo Mode activated!");
-})
-// 14. GOOGLE GEMINI 1.5 FLASH API CALLER
+});
+
+// 4. FLASHCARD DISPLAY FUNCTION
+function updateCardDisplay() {
+    const card = currentDeck[currentCardIndex];
+
+    if (isFlipped) {
+        // Show Answer Side (Green)
+        cardHint.textContent = "ANSWER / EXPLANATION";
+        cardHint.style.color = "#10b981";
+        cardDisplayText.textContent = card.back;
+    } else {
+        // Show Question Side (Indigo)
+        cardHint.textContent = "CONCEPT / QUESTION";
+        cardHint.style.color = "#4f46e5";
+        cardDisplayText.textContent = card.front;
+    }
+
+    // Update progress text
+    cardProgressText.textContent = `Card ${currentCardIndex + 1} of ${currentDeck.length}`;
+    cardCounterBadge.textContent = `${currentDeck.length} Cards`;
+}
+
+// 5. FLASHCARD CONTROLS & FLIP
+flashcardBox.addEventListener("click", () => {
+    isFlipped = !isFlipped;
+    updateCardDisplay();
+});
+
+nextCardBtn.addEventListener("click", () => {
+    if (currentCardIndex < currentDeck.length - 1) {
+        currentCardIndex++;
+        isFlipped = false;
+        updateCardDisplay();
+    }
+});
+
+prevCardBtn.addEventListener("click", () => {
+    if (currentCardIndex > 0) {
+        currentCardIndex--;
+        isFlipped = false;
+        updateCardDisplay();
+    }
+});
+
+// Initialize First Card
+updateCardDisplay();
+
+// 6. QUICK TOPIC CHIPS
+chips.forEach(chip => {
+    chip.addEventListener("click", () => {
+        const topic = chip.getAttribute("data-topic");
+        studyInput.value = topic;
+        studyInput.focus();
+    });
+});
+
+// 7. GENERATE BUTTON (STUDY FORGE)
+generateBtn.addEventListener("click", async () => {
+    const text = studyInput.value.trim();
+
+    if (!text) {
+        alert("Please enter a topic or click a quick topic chip above!");
+        studyInput.focus();
+        return;
+    }
+
+    // Check for API Key
+    if (!apiKey) {
+        apiModal.style.display = "flex";
+        return;
+    }
+
+    if (apiKey === "DEMO_MODE") {
+        // Offline Demo Deck
+        currentDeck = [
+            {
+                front: `Core Concept: ${text}`,
+                back: `Detailed explanation and key principles for ${text}. Focus on definitions, mechanisms, and real-world trade-offs.`
+            },
+            {
+                front: `What is the main advantage of ${text}?`,
+                back: `Improves system performance, security, and scalability when implemented correctly.`
+            },
+            {
+                front: `What is a common edge-case or challenge with ${text}?`,
+                back: `Resource contention, race conditions, or unhandled null pointers in boundary conditions.`
+            }
+        ];
+        renderQuiz(text);
+    } else {
+        // Real Google Gemini AI API Call
+        try {
+            generateBtn.disabled = true;
+            generateBtn.textContent = "⏳ AI is thinking...";
+            
+            const aiResult = await callGeminiAPI(text, difficultyLevel ? difficultyLevel.value : "university");
+            
+            if (aiResult.flashcards && aiResult.flashcards.length > 0) {
+                currentDeck = aiResult.flashcards;
+            }
+            
+            if (aiResult.quiz && aiResult.quiz.length > 0) {
+                renderAIQuiz(aiResult.quiz[0], text);
+            }
+        } catch (err) {
+            alert(`❌ AI Error: ${err.message}`);
+        } finally {
+            generateBtn.disabled = false;
+            generateBtn.textContent = "✨ Generate Study Deck";
+        }
+    }
+
+    currentCardIndex = 0;
+    isFlipped = false;
+    updateCardDisplay();
+});
+
+// 8. RENDER QUIZ (OFFLINE DEMO)
+function renderQuiz(topic) {
+    quizArea.innerHTML = `
+        <div style="text-align: left; max-width: 650px; margin: 0 auto;">
+            <div style="font-size: 0.78rem; font-weight: 700; color: #4f46e5; margin-bottom: 6px; text-transform: uppercase;">
+                Question 1 of 1 • ${topic}
+            </div>
+            <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: #0f172a;">
+                Which principle is most essential when understanding ${topic}?
+            </h4>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+                <button class="btn-secondary" style="text-align: left; padding: 0.75rem 1rem;" onclick="handleQuizAnswer(this, true)">
+                    <strong>A.</strong> Correct partitioning and structural optimization
+                </button>
+                <button class="btn-secondary" style="text-align: left; padding: 0.75rem 1rem;" onclick="handleQuizAnswer(this, false)">
+                    <strong>B.</strong> Linear sequential scanning without indexes
+                </button>
+                <button class="btn-secondary" style="text-align: left; padding: 0.75rem 1rem;" onclick="handleQuizAnswer(this, false)">
+                    <strong>C.</strong> Completely random memory allocation
+                </button>
+            </div>
+            <div id="quiz-feedback" style="display: none; margin-top: 1rem; padding: 0.85rem 1rem; border-radius: 8px; font-size: 0.88rem; line-height: 1.5;"></div>
+        </div>
+    `;
+}
+
+// 9. RENDER AI QUIZ (DYNAMIC)
+function renderAIQuiz(quizData, topic) {
+    let optionsHtml = "";
+    quizData.options.forEach((opt, idx) => {
+        const isCorrect = idx === quizData.answerIndex;
+        optionsHtml += `
+            <button class="btn-secondary" style="text-align: left; padding: 0.75rem 1rem;" onclick="handleQuizAnswer(this, ${isCorrect}, '${quizData.explanation.replace(/'/g, "\\'")}')">
+                <strong>${String.fromCharCode(65 + idx)}.</strong> ${opt}
+            </button>
+        `;
+    });
+
+    quizArea.innerHTML = `
+        <div style="text-align: left; max-width: 650px; margin: 0 auto;">
+            <div style="font-size: 0.78rem; font-weight: 700; color: #4f46e5; margin-bottom: 6px; text-transform: uppercase;">
+                AI GENERATED QUESTION • ${topic}
+            </div>
+            <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: #0f172a;">
+                ${quizData.question}
+            </h4>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+                ${optionsHtml}
+            </div>
+            <div id="quiz-feedback" style="display: none; margin-top: 1rem; padding: 0.85rem 1rem; border-radius: 8px; font-size: 0.88rem; line-height: 1.5;"></div>
+        </div>
+    `;
+}
+
+// 10. INSTANT QUIZ GRADING LOGIC
+window.handleQuizAnswer = function(button, isCorrect, explanation) {
+    const feedback = document.getElementById("quiz-feedback");
+    feedback.style.display = "block";
+
+    if (isCorrect) {
+        button.style.backgroundColor = "#ecfdf5";
+        button.style.borderColor = "#10b981";
+        button.style.color = "#047857";
+        feedback.style.backgroundColor = "#ecfdf5";
+        feedback.style.color = "#047857";
+        feedback.innerHTML = `🎉 <strong>Correct!</strong> ${explanation || "Great job! That is the correct concept."}`;
+    } else {
+        button.style.backgroundColor = "#fef2f2";
+        button.style.borderColor = "#ef4444";
+        button.style.color = "#b91c1c";
+        feedback.style.backgroundColor = "#fef2f2";
+        feedback.style.color = "#b91c1c";
+        feedback.innerHTML = `❌ <strong>Incorrect.</strong> ${explanation || "That option is incorrect. Try reviewing the core concept!"}`;
+    }
+};
+
+// 11. GOOGLE GEMINI 1.5 FLASH API CALLER
 async function callGeminiAPI(userInput, difficulty) {
     const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
-    // Prompt Engineering: Instructing Gemini to output strict JSON
     const systemPrompt = `
 You are an expert AI study assistant. Transform the provided notes/topic into high-quality study materials for ${difficulty} level.
-Output ONLY a raw, valid JSON object matching this schema exactly (no extra text or markdown formatting):
+Output ONLY a raw, valid JSON object matching this schema exactly (no markdown formatting or extra text):
 {
   "flashcards": [
     {
@@ -279,4 +328,3 @@ Generate 3 flashcards and 1 quiz question.`;
     const rawContent = data.candidates?.[0]?.content?.parts?.[0]?.text;
     return JSON.parse(rawContent);
 }
-};
