@@ -609,3 +609,22 @@ body {
     font-weight: 600;
     color: var(--primary-indigo);
 }
+
+/* --- SAVED DECKS SELECTOR --- */
+.deck-select {
+    background-color: var(--indigo-soft);
+    border: 1px solid #c7d2fe;
+    color: var(--primary-indigo);
+    font-family: inherit;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 0.25rem 0.6rem;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.deck-select:hover {
+    background-color: #e0e7ff;
+}
