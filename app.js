@@ -393,3 +393,26 @@ if (savedDecksSelect) {
 
 // Populate dropdown on page load
 updateSavedDecksDropdown();
+
+// 18. THEME TOGGLE CONTROLLER (LIGHT / DARK)
+const themeToggleBtn = document.getElementById("theme-toggle-btn");
+const savedTheme = localStorage.getItem("mindpulse_theme") || "light";
+
+// Apply saved theme on page load
+if (savedTheme === "dark") {
+    document.body.classList.add("dark-theme");
+    if (themeToggleBtn) themeToggleBtn.textContent = "🌙";
+} else {
+    document.body.classList.remove("dark-theme");
+    if (themeToggleBtn) themeToggleBtn.textContent = "☀️";
+}
+
+// Toggle on click
+if (themeToggleBtn) {
+    themeToggleBtn.addEventListener("click", () => {
+        document.body.classList.toggle("dark-theme");
+        const isDark = document.body.classList.contains("dark-theme");
+        localStorage.setItem("mindpulse_theme", isDark ? "dark" : "light");
+        themeToggleBtn.textContent = isDark ? "🌙" : "☀️";
+    });
+}
