@@ -201,6 +201,8 @@ generateBtn.addEventListener("click", async () => {
         currentCardIndex = 0;
         isFlipped = false;
         updateCardDisplay();
+        // Save the newly generated deck into your library!
+saveDeckToHistory(text, currentDeck, quizArea.innerHTML);
 
     } catch (err) {
         alert(`❌ AI Error: ${err.message}`);
@@ -341,3 +343,53 @@ Generate 3 flashcards and 1 quiz question.`;
     const rawContent = data.candidates?.[0]?.content?.parts?.[0]?.text;
     return JSON.parse(rawContent);
 }
+
+// 15. UPDATE THE DROPDOWN LIST OF SAVED DECKS
+function updateSavedDecksDropdown() {
+    if (!savedDecksSelect) return;
+    
+    savedDecksSelect.innerHTML = `<option value="">📁 Saved Decks (${savedDecks.length})</option>`;
+    
+    savedDecks.forEach((item, index) => {
+        const option = document.createElement("option");
+        option.value = index;
+        // Truncate long titles so the dropdown looks tidy
+        option.textContent = item.title.length > 22 ? item.title.substring(0, 22) + "..." : item.title;
+        savedDecksSelect.appendChild(option);
+    });
+}
+
+// 16. SAVE A GENERATED DECK INTO LOCALSTORAGE
+function saveDeckToHistory(title, deck, quizHtml) {
+    // Check if deck already exists
+    const existingIndex = savedDecks.findIndex(d => d.title.toLowerCase() === title.toLowerCase());
+    if (existingIndex !== -1) {
+        savedDecks[existingIndex] = { title, deck, quizHtml };
+    } else {
+        savedDecks.unshift({ title, deck, quizHtml }); // Add newest deck to the top
+    }
+
+    localStorage.setItem("mindpulse_saved_decks", JSON.stringify(savedDecks));
+    updateSavedDecksDropdown();
+}
+
+// 17. SWITCH DECKS WHEN USER PICKS FROM DROPDOWN
+if (savedDecksSelect) {
+    savedDecksSelect.addEventListener("change", (e) => {
+        const selectedIndex = e.target.value;
+        if (selectedIndex === "") return;
+
+        const selected = savedDecks[selectedIndex];
+        currentDeck = selected.deck;
+        currentCardIndex = 0;
+        isFlipped = false;
+        updateCardDisplay();
+
+        if (selected.quizHtml) {
+            quizArea.innerHTML = selected.quizHtml;
+        }
+    });
+}
+
+// Populate dropdown on page load
+updateSavedDecksDropdown();
