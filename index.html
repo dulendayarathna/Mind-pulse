@@ -92,11 +92,16 @@
 
             <!-- RIGHT PANEL: Live 3D Study Deck Stage -->
             <section id="study-stage" class="panel-card">
-                <div class="panel-title-bar">
-                    <h3>🎴 3D Study Flashcards</h3>
-                    <span id="card-counter-badge" class="panel-badge">5 Cards</span>
-                </div>
-
+                <!-- AFTER: -->
+<div class="panel-title-bar">
+    <div style="display: flex; align-items: center; gap: 8px;">
+        <h3>🎴 3D Study Flashcards</h3>
+        <select id="saved-decks-select" class="deck-select">
+            <option value="">📁 Saved Decks (0)</option>
+        </select>
+    </div>
+    <span id="card-counter-badge" class="panel-badge">5 Cards</span>
+</div>
                 <!-- Flashcard Screen -->
                 <div class="flashcard-box" id="flashcard-box">
                     <div class="flashcard-content">
