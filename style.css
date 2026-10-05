@@ -628,3 +628,45 @@ body {
 .deck-select:hover {
     background-color: #e0e7ff;
 }
+
+/* =======================================================
+   🌙 DARK THEME OVERRIDES
+   ======================================================= */
+body.dark-theme {
+    --bg-canvas: #090d16;
+    --card-bg: #111827;
+    --card-border: #1f2937;
+    --text-heading: #f8fafc;
+    --text-body: #cbd5e1;
+    --text-muted: #94a3b8;
+    --indigo-soft: rgba(79, 70, 229, 0.18);
+}
+
+body.dark-theme .app-header {
+    background-color: #0b1120;
+}
+
+body.dark-theme .btn-secondary,
+body.dark-theme .btn-icon,
+body.dark-theme .chip,
+body.dark-theme .textarea-group textarea,
+body.dark-theme .select-group select,
+body.dark-theme .modal-card,
+body.dark-theme .input-field-group input {
+    background-color: #1a2234;
+    color: #f8fafc;
+    border-color: #334155;
+}
+
+body.dark-theme .flashcard-box {
+    background: linear-gradient(135deg, #111827, #1a2234);
+}
+
+body.dark-theme .quiz-area {
+    background-color: #0f172a;
+    border-color: #1f2937;
+}
+
+body.dark-theme .app-footer {
+    background-color: #0b1120;
+}
