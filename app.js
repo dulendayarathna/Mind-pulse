@@ -31,6 +31,7 @@ const generateBtn = document.getElementById("generate-btn");
 const chips = document.querySelectorAll(".chip");
 const quizArea = document.getElementById("quiz-area");
 const difficultyLevel = document.getElementById("difficulty-level");
+const loadingState = document.getElementById("loading-state");
 
 // Modal DOM Elements
 const apiKeyBtn = document.getElementById("api-key-btn");
