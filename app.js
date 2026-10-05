@@ -140,6 +140,7 @@ chips.forEach(chip => {
 });
 
 // 7. GENERATE BUTTON (STUDY FORGE)
+// 7. GENERATE BUTTON (STUDY FORGE)
 generateBtn.addEventListener("click", async () => {
     const text = studyInput.value.trim();
 
@@ -155,29 +156,33 @@ generateBtn.addEventListener("click", async () => {
         return;
     }
 
-    if (apiKey === "DEMO_MODE") {
-        // Offline Demo Deck
-        currentDeck = [
-            {
-                front: `Core Concept: ${text}`,
-                back: `Detailed explanation and key principles for ${text}. Focus on definitions, mechanisms, and real-world trade-offs.`
-            },
-            {
-                front: `What is the main advantage of ${text}?`,
-                back: `Improves system performance, security, and scalability when implemented correctly.`
-            },
-            {
-                front: `What is a common edge-case or challenge with ${text}?`,
-                back: `Resource contention, race conditions, or unhandled null pointers in boundary conditions.`
-            }
-        ];
-        renderQuiz(text);
-    } else {
-        // Real Google Gemini AI API Call
-        try {
-            generateBtn.disabled = true;
-            generateBtn.textContent = "⏳ AI is thinking...";
-            
+    // 🟢 1. SHOW THE SPINNER & DISABLE BUTTON
+    loadingState.style.display = "block";
+    generateBtn.disabled = true;
+    generateBtn.textContent = "⏳ Generating...";
+
+    try {
+        if (apiKey === "DEMO_MODE") {
+            // Small realistic pause so the spinner looks smooth even in offline demo!
+            await new Promise(resolve => setTimeout(resolve, 800));
+
+            currentDeck = [
+                {
+                    front: `Core Concept: ${text}`,
+                    back: `Detailed explanation and key principles for ${text}. Focus on definitions, mechanisms, and real-world trade-offs.`
+                },
+                {
+                    front: `What is the main advantage of ${text}?`,
+                    back: `Improves system performance, security, and scalability when implemented correctly.`
+                },
+                {
+                    front: `What is a common edge-case or challenge with ${text}?`,
+                    back: `Resource contention, race conditions, or unhandled null pointers in boundary conditions.`
+                }
+            ];
+            renderQuiz(text);
+        } else {
+            // Real Google Gemini AI Call
             const aiResult = await callGeminiAPI(text, difficultyLevel ? difficultyLevel.value : "university");
             
             if (aiResult.flashcards && aiResult.flashcards.length > 0) {
@@ -187,17 +192,21 @@ generateBtn.addEventListener("click", async () => {
             if (aiResult.quiz && aiResult.quiz.length > 0) {
                 renderAIQuiz(aiResult.quiz[0], text);
             }
-        } catch (err) {
-            alert(`❌ AI Error: ${err.message}`);
-        } finally {
-            generateBtn.disabled = false;
-            generateBtn.textContent = "✨ Generate Study Deck";
         }
-    }
 
-    currentCardIndex = 0;
-    isFlipped = false;
-    updateCardDisplay();
+        // Reset to first card
+        currentCardIndex = 0;
+        isFlipped = false;
+        updateCardDisplay();
+
+    } catch (err) {
+        alert(`❌ AI Error: ${err.message}`);
+    } finally {
+        // 🔴 2. HIDE SPINNER & RE-ENABLE BUTTON WHEN DONE
+        loadingState.style.display = "none";
+        generateBtn.disabled = false;
+        generateBtn.textContent = "✨ Generate Study Deck";
+    }
 });
 
 // 8. RENDER QUIZ (OFFLINE DEMO)
