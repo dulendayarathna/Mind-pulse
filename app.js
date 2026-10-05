@@ -32,6 +32,9 @@ const chips = document.querySelectorAll(".chip");
 const quizArea = document.getElementById("quiz-area");
 const difficultyLevel = document.getElementById("difficulty-level");
 const loadingState = document.getElementById("loading-state");
+// Load saved decks from localStorage (or start with an empty list)
+let savedDecks = JSON.parse(localStorage.getItem("mindpulse_saved_decks")) || [];
+const savedDecksSelect = document.getElementById("saved-decks-select");
 
 // Modal DOM Elements
 const apiKeyBtn = document.getElementById("api-key-btn");
